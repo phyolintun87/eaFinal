@@ -39,7 +39,8 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
         }
 
         //TODO TEST
-        List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_umur");
+        String csvRoles = String.join(",", jwtUserDetailsRes.getData().getRoles());
+        List<GrantedAuthority> grantedAuthorities =AuthorityUtils.commaSeparatedStringToAuthorityList(csvRoles);
         jwtUserDetailsRes.getData().setAuthorities(grantedAuthorities);
 
 

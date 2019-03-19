@@ -5,9 +5,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.List;
 
 @Component
-public class JwtUserDetails  implements UserDetails {
+public class JwtUserDetails implements UserDetails {
 
     private long id;
     private String username;
@@ -15,10 +16,20 @@ public class JwtUserDetails  implements UserDetails {
     private String lastName;
     private Collection<GrantedAuthority> authorities;
 
+    private List<String> roles;
+
     public void setAuthorities(Collection<GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 
     public long getId() {
         return id;

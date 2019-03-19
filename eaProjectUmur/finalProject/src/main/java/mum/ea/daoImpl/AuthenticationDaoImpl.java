@@ -2,6 +2,7 @@ package mum.ea.daoImpl;
 
 import mum.ea.dao.AuthenticationDao;
 import mum.ea.domain.Member;
+import mum.ea.domain.Roles;
 import mum.ea.dto.ExtendedLoginModel;
 import mum.ea.dto.LoginModel;
 import mum.ea.enums.StatusCode;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class AuthenticationDaoImpl implements AuthenticationDao {
@@ -33,6 +36,13 @@ public class AuthenticationDaoImpl implements AuthenticationDao {
                 if (member != null) {
                     ExtendedLoginModel extendedLoginModel = new ExtendedLoginModel();
                     extendedLoginModel.setUsername(member.getUsername());
+
+                    List<String> roles = new ArrayList<String>();
+                    for (Roles role : member.getRoleList()){
+                        roles.add(role.getName());
+                    }
+                    extendedLoginModel.setRoleList(roles);
+
                     result.setData(extendedLoginModel);
                     result.makeSuccess();
                 } else {

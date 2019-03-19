@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.List;
 
 @Component
 public class JwtUtil {
@@ -20,7 +21,7 @@ public class JwtUtil {
         claims.put("username", jwtUserDetails.getUsername());
         claims.put("firstName", jwtUserDetails.getFirstName());
         claims.put("lastName", jwtUserDetails.getLastName());
-        claims.put("authorities", jwtUserDetails.getAuthorities());
+        claims.put("roles", jwtUserDetails.getRoles());
         EaResultData<String> result = new EaResultData<String>();
         result.setData(Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, secret).compact());
         result.makeSuccess();
@@ -39,7 +40,7 @@ public class JwtUtil {
             jwtUserDetails.setUsername((String) body.get("username"));
             jwtUserDetails.setFirstName((String) body.get("firstName"));
             jwtUserDetails.setLastName((String) body.get("lastName"));
-            jwtUserDetails.setAuthorities((Collection<GrantedAuthority>) body.get("authorities"));
+            jwtUserDetails.setRoles((List<String>) body.get("roles"));
 
             result.setData(jwtUserDetails);
             result.makeSuccess();
