@@ -29,6 +29,14 @@ public class Member extends BaseDomain {
     @OneToMany
     private List<Roles> roleList;
 
+    public List<Roles> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Roles> roleList) {
+        this.roleList = roleList;
+    }
+
     public String getMail() {
         return mail;
     }
