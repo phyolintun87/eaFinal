@@ -23,6 +23,7 @@
 
 
     <import resource="classpath:batch-config.xml"/>
+    <import resource="classpath:material-app-context.xml"/>
 
     <context:property-placeholder
             location="classpath:application.properties"/>
