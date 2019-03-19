@@ -26,7 +26,7 @@ public class Member extends BaseDomain {
     @OneToMany(mappedBy = "instructor",fetch = FetchType.EAGER)
     private List<Course> teachingCourseList;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Roles> roleList;
 
     public List<Roles> getRoleList() {
