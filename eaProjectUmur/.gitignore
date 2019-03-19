@@ -8,6 +8,7 @@ projectName.iml
 /build
 /local.properties
 target/
+.class
 finalProject/.project
 finalProject/.settings/.jsdtscope
 finalProject/.settings/org.eclipse.jdt.core.prefs

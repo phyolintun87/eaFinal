@@ -16,7 +16,7 @@ public abstract class CrudController<TDomain extends BaseDomain, TService extend
     @Autowired
     private TService service;
 
-    @PostMapping
+    @PostMapping(produces = "application/json")
     public EaResult save(@RequestBody TDomain t) {
         return service.save(t);
     }
