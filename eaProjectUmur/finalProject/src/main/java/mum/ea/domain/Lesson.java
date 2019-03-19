@@ -11,7 +11,8 @@ import java.util.List;
 
 @Entity
 public class Lesson extends BaseDomain {
-
+    
+	
     private String name;
 
     @ManyToOne

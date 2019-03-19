@@ -39,7 +39,7 @@ public class TestServiceImpl implements TestService {
         return testDao.findById(id);
     }
 
-    @Secured("ROLE_umur2")
+    @Secured("ROLE_test")
     @PerformanceLog
     public EaResultData<List<Test>> findAll() {
         return testDao.findAll();

@@ -3,12 +3,17 @@ package mum.ea.domain;
 import mum.ea.domain.abstracts.BaseDomain;
 
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.List;
 
 @Entity
 public class Course extends BaseDomain {
 
     private String name;
+    @NotEmpty(message="Shoule not be empty")
+    private String description;
 
     @OneToMany(mappedBy = "course")
     private List<Lesson> lessonList;
