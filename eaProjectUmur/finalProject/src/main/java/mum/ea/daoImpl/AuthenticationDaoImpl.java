@@ -36,6 +36,7 @@ public class AuthenticationDaoImpl implements AuthenticationDao {
                 if (member != null) {
                     ExtendedLoginModel extendedLoginModel = new ExtendedLoginModel();
                     extendedLoginModel.setUsername(member.getUsername());
+                    extendedLoginModel.setId(member.getId());
 
                     List<String> roles = new ArrayList<String>();
                     for (Roles role : member.getRoleList()){

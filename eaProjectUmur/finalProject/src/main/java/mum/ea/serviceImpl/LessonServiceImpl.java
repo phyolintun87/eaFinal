@@ -5,6 +5,7 @@ import mum.ea.domain.Lesson;
 import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
 import mum.ea.service.LessonService;
+import mum.ea.validation.EaValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ public class LessonServiceImpl implements LessonService {
     @Autowired
     private LessonDao lessonDao;
 
+    @EaValidate
     public EaResult save(Lesson t) {
        return lessonDao.save(t);
     }

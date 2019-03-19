@@ -5,11 +5,12 @@ import mum.ea.domain.abstracts.BaseDomain;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Material extends BaseDomain {
 
-
+    @Size(min = 10)
     private String name;
 
     @ManyToOne

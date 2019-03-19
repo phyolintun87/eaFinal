@@ -31,6 +31,7 @@ public class TestServiceImpl implements TestService {
         return testDao.delete(id);
     }
 
+    @EaValidate
     public EaResult update(Test t) {
         return testDao.update(t);
     }

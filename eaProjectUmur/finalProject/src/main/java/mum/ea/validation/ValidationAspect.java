@@ -33,6 +33,7 @@ public class ValidationAspect {
     public void args(Object object) {
     }
 
+
     @Before("annotation() && args(object)")
     public void doValidate(Object object) {
         Errors errors = new BeanPropertyBindingResult(object, object.getClass().getName());
