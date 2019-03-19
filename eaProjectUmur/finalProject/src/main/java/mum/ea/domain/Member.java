@@ -1,18 +1,26 @@
 package mum.ea.domain;
 
 import mum.ea.domain.abstracts.BaseDomain;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Member extends BaseDomain {
 
+    @NotEmpty
     private String firstname;
+
+    @NotEmpty
     private String lastname;
+
+    @NotEmpty
     private String username;
+
+    @NotEmpty
     private String password;
+
     private String mail;
 
 

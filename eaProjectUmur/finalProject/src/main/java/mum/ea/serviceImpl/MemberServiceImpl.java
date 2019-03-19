@@ -5,6 +5,7 @@ import mum.ea.domain.Member;
 import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
 import mum.ea.service.MemberService;
+import mum.ea.validation.EaValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberDao memberDao;
 
+    @EaValidate
     public EaResult save(Member t) {
        return memberDao.save(t);
     }

@@ -10,17 +10,13 @@ import mum.ea.dto.MailDto;
 import mum.ea.mail.EaMailSender;
 import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
-import mum.ea.security.EaGrantedAuthority;
 import mum.ea.security.JwtUserDetails;
 import mum.ea.security.JwtUtil;
 import mum.ea.service.AuthenticationService;
+import mum.ea.validation.EaValidate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Transactional
 @Service
@@ -38,6 +34,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     private EaMailSender eaMailSender;
 
+    @EaValidate
     public EaResult register(Member member) {
         EaResult result = memberDao.save(member);
 
