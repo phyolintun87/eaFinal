@@ -4,7 +4,11 @@ import mum.ea.dao.CourseDao;
 import mum.ea.dao.abstracts.GenericDaoImpl;
 import mum.ea.domain.Course;
 import mum.ea.domain.Member;
+import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
+import mum.ea.security.JwtUserDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
@@ -15,6 +19,33 @@ import java.util.List;
 public class CourseDaoImpl extends GenericDaoImpl<Course> implements CourseDao {
     public CourseDaoImpl() {
         super.domainClass = Course.class;
+    }
+
+    public EaResult enroll(Long idCourse) {
+        EaResult result = new EaResult();
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUserDetails jwtUserDetails = (JwtUserDetails) authentication.getPrincipal();
+        long currentUserId = jwtUserDetails.getId();
+
+        try {
+            Query query = entityManager
+                    .createQuery("from Member where id=:id");
+            query.setParameter("id", currentUserId);
+
+            Member m = (Member) query.getSingleResult();
+            if (m.getCourseList() == null) {
+                m.setCourseList(new ArrayList<Course>());
+            }
+            Course c = new Course();
+            c.setId(idCourse);
+
+            m.getCourseList().add(c);
+
+        } catch (Exception e) {
+            int a = 5;
+        }
+        return result;
     }
 
     public EaResultData<List<Course>> listMyCourses(long idMember) {
@@ -40,17 +71,14 @@ public class CourseDaoImpl extends GenericDaoImpl<Course> implements CourseDao {
                     course.getInstructor().setFirstname(db.getInstructor().getFirstname());
                     course.getInstructor().setLastname(db.getInstructor().getLastname());
 
-
                     cl.add(course);
                 }
                 result.setData(cl);
-
             }
             result.makeSuccess();
         } catch (Exception e) {
 
         }
-
         return result;
     }
 }
