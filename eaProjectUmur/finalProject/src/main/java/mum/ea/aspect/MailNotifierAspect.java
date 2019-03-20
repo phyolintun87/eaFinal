@@ -19,8 +19,9 @@ public class MailNotifierAspect {
 	
     @Autowired
     private EaMailSender eaMailSender;
-	 
-	 @AfterReturning(pointcut="execution(* mum.ea.serviceimpl.MaterialServiceImpl.save(Lesson t))", returning="retVal")
+	
+	// @AfterReturning(pointcut="execution(* mum.ea.serviceimpl.LessonServiceImpl.save(..) && args(t))", returning="retVal")
+    @AfterReturning(pointcut="execution(* mum.ea.serviceImpl.LessonService.save(..)) && args(t)", returning="retVal")
 	  public void notify(JoinPoint joinPoint,Object retVal,Lesson t) {
 		System.out.println("   **********     TARGET CLASS : " + joinPoint.getSignature().getName() + "    **********"); 
 		EaResult result=(EaResult)retVal;
@@ -38,5 +39,6 @@ public class MailNotifierAspect {
 	
 		    	
 	}
+	
 	
 }

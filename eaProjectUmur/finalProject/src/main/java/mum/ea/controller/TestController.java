@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import mum.ea.controller.abstracts.CrudController;
+import mum.ea.domain.Course;
+import mum.ea.domain.Lesson;
 import mum.ea.domain.Material;
 import mum.ea.domain.Test;
+import mum.ea.service.CourseService;
+import mum.ea.service.LessonService;
 import mum.ea.service.TestService;
 
 @RestController
@@ -25,6 +29,13 @@ public class TestController extends CrudController<Test, TestService> {
     
     @Autowired
 	ResourceSvrNotifier resourceSvrNotifier;
+    
+    @Autowired
+    private LessonService lesssonService;
+    
+    @Autowired
+    private CourseService courseService;
+     
     
     @GetMapping(value = "/start")
     public void startBatch() {
@@ -57,6 +68,18 @@ public class TestController extends CrudController<Test, TestService> {
     	resourceSvrNotifier.savePayload(m);
     	
     	return "Successfully Save";
+    	
+    }
+    
+    @PostMapping(value="/lesson")
+    public String testSaveLesson() {
+    	Lesson l=new Lesson();
+    	Course c=courseService.findById(1L).getData();
+    	l.setName("Lesson1");
+    	l.setCourse(c);
+    	lesssonService.save(l);
+    	
+    	return "Successfully Save" ;
     	
     }
 }
