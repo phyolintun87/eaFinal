@@ -145,7 +145,7 @@ public class LoginPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        AddMemberPanel123 addMemberPanel = new AddMemberPanel123();
+        AddMemberPanel addMemberPanel = new AddMemberPanel();
         addMemberPanel.show();
         this.dispose();
     }//GEN-LAST:event_registerButtonActionPerformed

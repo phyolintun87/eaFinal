@@ -178,6 +178,9 @@ public class AddMemberPanel extends javax.swing.JFrame {
         EaResult result = memberController.save(memberModel);
         if (result.getStatusCode()==StatusCode.SUCCESS) {
             JOptionPane.showMessageDialog(null, "Succesfull");
+            LoginPanel loginPanel=new LoginPanel();
+            loginPanel.show();
+            this.dispose();
         } else {
             System.out.println(result.getStatusCode());
         }

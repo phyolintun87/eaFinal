@@ -12,7 +12,7 @@ import mum.ea.controller.MemberController;
 import mum.ea.helper.LoginHelper;
 import mum.ea.model.CourseModel;
 import mum.ea.model.EaResultData;
-import mum.ea.panel.AddMemberPanel123;
+import mum.ea.panel.AddMemberPanel;
 
 /**
  *
@@ -62,7 +62,6 @@ public class MainPanelStudent extends javax.swing.JFrame {
         studentCourse = new javax.swing.JPanel();
         myCourses = new javax.swing.JButton();
         enroll = new javax.swing.JButton();
-        archiveCourse = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -98,13 +97,6 @@ public class MainPanelStudent extends javax.swing.JFrame {
             }
         });
 
-        archiveCourse.setText("Archive Courses");
-        archiveCourse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                archiveCourseActionPerformed(evt);
-            }
-        });
-
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,9 +125,7 @@ public class MainPanelStudent extends javax.swing.JFrame {
                 .addComponent(myCourses)
                 .addGap(21, 21, 21)
                 .addComponent(enroll)
-                .addGap(164, 164, 164)
-                .addComponent(archiveCourse)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutButton)
                 .addGap(39, 39, 39))
             .addGroup(studentCourseLayout.createSequentialGroup()
@@ -146,7 +136,7 @@ public class MainPanelStudent extends javax.swing.JFrame {
                     .addGroup(studentCourseLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         studentCourseLayout.setVerticalGroup(
             studentCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +145,6 @@ public class MainPanelStudent extends javax.swing.JFrame {
                 .addGroup(studentCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(myCourses)
                     .addComponent(enroll)
-                    .addComponent(archiveCourse)
                     .addComponent(logoutButton))
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
@@ -209,18 +198,15 @@ public class MainPanelStudent extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
-    private void archiveCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_archiveCourseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_archiveCourseActionPerformed
-
     private void wishListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wishListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_wishListActionPerformed
 
     private void enrollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enrollActionPerformed
-        System.out.println("The Id:"+LoginHelper.getId());
-        System.out.println();
-        MemberController memberControl=new MemberController();
+     
+        EnrollCoursePanel enroll=new EnrollCoursePanel();
+        enroll.show();
+        this.dispose();
         //List<CourseModel> courses=memberControl.myCourse(LoginHelper.getId());
         
         //System.out.println("Size:"+courses.size());
@@ -267,7 +253,6 @@ public class MainPanelStudent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton archiveCourse;
     private javax.swing.JButton enroll;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

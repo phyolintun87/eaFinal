@@ -6,8 +6,6 @@
 package mum.ea.panel;
 
 import mum.ea.controller.BatchController;
-import mum.ea.panel.AddMemberPanel123;
-
 /**
  *
  * @author umurinan
@@ -37,6 +35,7 @@ public class MainPanel extends javax.swing.JFrame {
         startBatchButton = new javax.swing.JButton();
         listMyCoursesButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
+        addMaterial = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -77,6 +76,13 @@ public class MainPanel extends javax.swing.JFrame {
             }
         });
 
+        addMaterial.setText("Add Material");
+        addMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMaterialActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -89,9 +95,11 @@ public class MainPanel extends javax.swing.JFrame {
                         .addContainerGap(546, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(addCourseButton)
-                        .addGap(88, 88, 88)
+                        .addGap(18, 18, 18)
                         .addComponent(addLessonButton)
-                        .addGap(93, 93, 93)
+                        .addGap(32, 32, 32)
+                        .addComponent(addMaterial)
+                        .addGap(34, 34, 34)
                         .addComponent(listMyCoursesButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(logoutButton))))
@@ -104,7 +112,8 @@ public class MainPanel extends javax.swing.JFrame {
                     .addComponent(addCourseButton)
                     .addComponent(addLessonButton)
                     .addComponent(listMyCoursesButton)
-                    .addComponent(logoutButton))
+                    .addComponent(logoutButton)
+                    .addComponent(addMaterial))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                 .addComponent(startBatchButton)
                 .addGap(59, 59, 59))
@@ -153,6 +162,12 @@ public class MainPanel extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    private void addMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMaterialActionPerformed
+        AddMaterial addMaterial=new AddMaterial();
+        addMaterial.show();
+        this.dispose();
+    }//GEN-LAST:event_addMaterialActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,6 +206,7 @@ public class MainPanel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCourseButton;
     private javax.swing.JButton addLessonButton;
+    private javax.swing.JButton addMaterial;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton listMyCoursesButton;

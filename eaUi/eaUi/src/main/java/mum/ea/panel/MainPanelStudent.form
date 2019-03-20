@@ -90,9 +90,7 @@
                       <Component id="myCourses" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="enroll" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
-                      <Component id="archiveCourse" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="114" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="logoutButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
@@ -107,7 +105,7 @@
                               <Component id="jScrollPane1" min="-2" pref="674" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="111" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -118,7 +116,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="myCourses" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="enroll" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="archiveCourse" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="logoutButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -145,14 +142,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enrollActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="archiveCourse">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Archive Courses"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="archiveCourseActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="logoutButton">
