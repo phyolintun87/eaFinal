@@ -40,10 +40,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity(result, HttpStatus.UNAUTHORIZED);
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public void aa(Exception a) {
-//        int aa = 5;
-//    }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> aa(Exception a) {
+        EaResult result = new EaResult();
+        result.setStatusCode(StatusCode.UNKNOWN_ERROR);
+        result.setMessage("SOMETHING WENT VERY WRONG.  THIS COMES FROM GLOBAL EXCEPTION HANDLER\n" + a.getMessage());
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
 
 
 }

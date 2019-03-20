@@ -3,6 +3,8 @@ package mum.ea.daoImpl;
 import mum.ea.dao.MemberDao;
 import mum.ea.dao.abstracts.GenericDaoImpl;
 import mum.ea.domain.Member;
+import mum.ea.domain.MemberType;
+import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,16 @@ import java.util.List;
 public class MemberDaoImpl extends GenericDaoImpl<Member> implements MemberDao {
     public MemberDaoImpl() {
         super.domainClass = Member.class;
+    }
+
+    @Override
+    public EaResult save(Member t) {
+        if(t.getMemberType() == null) {
+            t.setMemberType(new MemberType());
+
+            t.getMemberType().setId(1L);
+        }
+        return super.save(t);
     }
 
     @Override
