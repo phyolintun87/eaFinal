@@ -35,7 +35,7 @@ public class Course extends BaseDomain {
 
     @JsonIgnore
    // @JsonBackReference(value = "courseList")
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name = "Enrollment",
             joinColumns = {@JoinColumn(name = "id_course")},
             inverseJoinColumns = {@JoinColumn(name = "id_member")})

@@ -1,17 +1,22 @@
 package mum.ea.daoImpl;
 
+import com.sun.tools.internal.xjc.outline.ClassOutline;
 import mum.ea.dao.CourseDao;
 import mum.ea.dao.abstracts.GenericDaoImpl;
 import mum.ea.domain.Course;
 import mum.ea.domain.Member;
+import mum.ea.dto.CourseDto;
 import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
 import mum.ea.security.JwtUserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
+import javax.transaction.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,25 +34,17 @@ public class CourseDaoImpl extends GenericDaoImpl<Course> implements CourseDao {
         long currentUserId = jwtUserDetails.getId();
 
         try {
+            Course c = findById(idCourse).getData();
+            if (c.getJoinedMembers() == null) {
+                c.setJoinedMembers(new ArrayList<Member>());
+            }
 
-            Query query = entityManager.createNativeQuery("insert into eaFinal.member_role_rel(Member_id, roleList_id) VALUES (?,?)");
-            query.setParameter(1,currentUserId);
-            query.setParameter(2,idCourse);
-            query.executeUpdate();
-//            Query query = entityManager
-//                    .createQuery("from Member where id=:id");
-//            query.setParameter("id", currentUserId);
-//
-//            Member m = (Member) query.getSingleResult();
-//            if (m.getCourseList() == null) {
-//                m.setCourseList(new ArrayList<Course>());
-//            }
-//            Course c = new Course();
-//            c.setId(idCourse);
-//
-//            m.getCourseList().add(c);
-//
-//            entityManager.merge(m);
+            Member m = new Member();
+            m.setId(currentUserId);
+
+            c.getJoinedMembers().add(m);
+
+            entityManager.merge(c);
 
         } catch (Exception e) {
             int a = 5;

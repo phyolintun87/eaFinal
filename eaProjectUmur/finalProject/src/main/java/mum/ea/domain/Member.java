@@ -50,7 +50,7 @@ public class Member extends BaseDomain {
 
     @JsonIgnore
     // @JsonManagedReference(value = "courseList")
-    @ManyToMany(mappedBy = "joinedMembers", fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @ManyToMany(mappedBy = "joinedMembers", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SELECT)
     @BatchSize(size = 3)
     private List<Course> courseList;
