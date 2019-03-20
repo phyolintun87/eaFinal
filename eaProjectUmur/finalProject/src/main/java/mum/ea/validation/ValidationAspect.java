@@ -1,5 +1,6 @@
 package mum.ea.validation;
 
+import mum.ea.domain.Member;
 import mum.ea.exceptions.EaValidationException;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -12,8 +13,11 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Aspect
 @Component
@@ -36,6 +40,30 @@ public class ValidationAspect {
 
     @Before("annotation() && args(object)")
     public void doValidate(Object object) {
+
+//        boolean isMember = false;
+//        Member m =null;
+//        try {
+//            m = (Member) object;
+//            isMember = true;
+//        } catch (Exception e) {
+//            isMember = false;
+//        }
+//
+//        if(isMember){
+//            if(m.isForBatch()){
+//                javax.validation.Validator groupValidator = Validation.buildDefaultValidatorFactory().getValidator();
+//                Set<ConstraintViolation<Object>> errors = groupValidator.validate(object, StandardGroup.class);
+//                Boolean validationSuccess = errors.size() == 0 ? true : false;
+//                if (!validationSuccess){
+//                    List<String> messages = new ArrayList<String>();
+//                    messages.add("Validation Failed");
+//                    throw new EaValidationException(null,messages);
+//                }
+//            }
+//        }
+
+
         Errors errors = new BeanPropertyBindingResult(object, object.getClass().getName());
 
         validator.validate(object, errors);
@@ -47,7 +75,7 @@ public class ValidationAspect {
                 messages.add(messageAccessor.getMessage(fieldError));
 
             }
-            throw new EaValidationException(errors,messages);
+            throw new EaValidationException(errors, messages);
         }
 
         return;
