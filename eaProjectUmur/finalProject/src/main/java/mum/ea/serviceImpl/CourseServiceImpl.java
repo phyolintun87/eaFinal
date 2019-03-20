@@ -15,6 +15,7 @@ import mum.ea.validation.EaValidate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     private RabbitTemplate topicTemplate;
 
+    @Secured(value = "ROLE_ADD_COURSE")
     @EaValidate
     public EaResult save(Course course) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -67,6 +69,7 @@ public class CourseServiceImpl implements CourseService {
         return courseDao.delete(id);
     }
 
+    @Secured(value = "ROLE_ADD_COURSE")
     @EaValidate
     public EaResult update(Course t) {
         return courseDao.update(t);

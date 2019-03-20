@@ -7,6 +7,7 @@ import mum.ea.model.EaResultData;
 import mum.ea.service.LessonService;
 import mum.ea.validation.EaValidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ public class LessonServiceImpl implements LessonService {
     @Autowired
     private LessonDao lessonDao;
 
+    @Secured(value = "ROLE_ADD_LESSON")
     @EaValidate
     public EaResult save(Lesson lesson) {
 
@@ -29,6 +31,7 @@ public class LessonServiceImpl implements LessonService {
        return lessonDao.delete(id);
     }
 
+    @Secured(value = "ROLE_ADD_LESSON")
     public EaResult update(Lesson t) {
         return lessonDao.update(t);
     }

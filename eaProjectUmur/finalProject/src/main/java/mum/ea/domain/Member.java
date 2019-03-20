@@ -44,6 +44,9 @@ public class Member extends BaseDomain {
     @JoinColumn(name = "id_member_type")
     private MemberType memberType;
 
+    @Transient
+    private Long idMemberType;
+
 
     @JsonIgnore
     // @JsonManagedReference(value = "courseList")
@@ -57,9 +60,17 @@ public class Member extends BaseDomain {
     @OneToMany(mappedBy = "instructor", fetch = FetchType.EAGER)
     private List<Course> teachingCourseList;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     @JoinTable(name = "member_role_rel", inverseJoinColumns = {@JoinColumn(unique = false)})
     private List<Roles> roleList;
+
+    public Long getIdMemberType() {
+        return idMemberType;
+    }
+
+    public void setIdMemberType(Long idMemberType) {
+        this.idMemberType = idMemberType;
+    }
 
     public boolean isForBatch() {
         return isForBatch;

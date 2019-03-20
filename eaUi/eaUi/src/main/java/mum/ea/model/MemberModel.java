@@ -17,6 +17,27 @@ public class MemberModel {
     private String username;
     private String password;
     private String mail;
+    private Long idMemberType;
+    
+    private MemberType memberType;
+
+    public MemberType getMemberTypeModel() {
+        return memberType;
+    }
+
+    public void setMemberTypeModel(MemberType memberTypeModel) {
+        this.memberType= memberTypeModel;
+    }
+
+    public Long getIdMemberType() {
+        return idMemberType;
+    }
+
+    public void setIdMemberType(Long idMemberType) {
+        this.idMemberType = idMemberType;
+    }
+    
+    
 
     public Long getId() {
         return id;

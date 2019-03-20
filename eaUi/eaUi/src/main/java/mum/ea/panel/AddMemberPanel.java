@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import mum.ea.controller.MemberController;
 import mum.ea.model.EaResult;
 import mum.ea.model.MemberModel;
+import mum.ea.model.MemberType;
 import mum.ea.model.StatusCode;
 
 /**
@@ -45,6 +46,8 @@ public class AddMemberPanel extends javax.swing.JFrame {
         passwordField = new javax.swing.JTextField();
         mailField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        memberTypeCombo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +68,10 @@ public class AddMemberPanel extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Member Type");
+
+        memberTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teacher", "Student" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -80,15 +87,17 @@ public class AddMemberPanel extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
-                                .addComponent(jLabel4)))
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel6)))
                         .addGap(86, 86, 86)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(firstnameField, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                             .addComponent(lastnameField)
                             .addComponent(usernameField)
                             .addComponent(passwordField)
-                            .addComponent(mailField))))
-                .addContainerGap(402, Short.MAX_VALUE))
+                            .addComponent(mailField)
+                            .addComponent(memberTypeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(380, 380, 380))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +122,11 @@ public class AddMemberPanel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(mailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(memberTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(saveButton)
                 .addContainerGap(90, Short.MAX_VALUE))
         );
@@ -140,6 +153,15 @@ public class AddMemberPanel extends javax.swing.JFrame {
         memberModel.setPassword(passwordField.getText());
         memberModel.setMail(mailField.getText());
 
+ 
+        if(memberTypeCombo.getSelectedIndex() ==2){
+            
+            memberModel.setIdMemberType(1L);
+        }else{
+             memberModel.setIdMemberType(2L);
+        }
+     
+        
         MemberController memberController = new MemberController();
         EaResult result = memberController.save(memberModel);
         if (result.getStatusCode()==StatusCode.SUCCESS) {
@@ -193,9 +215,11 @@ public class AddMemberPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField lastnameField;
     private javax.swing.JTextField mailField;
+    private javax.swing.JComboBox<String> memberTypeCombo;
     private javax.swing.JTextField passwordField;
     private javax.swing.JButton saveButton;
     private javax.swing.JTextField usernameField;

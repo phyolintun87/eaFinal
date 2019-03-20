@@ -40,15 +40,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity(result, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(UnsupportedMediaException.class)
-    public void asd(UnsupportedMediaException e) {
-        int a = 5;
-    }
-
-    @ExceptionHandler(Exception.class)
-    public void aa(Exception a) {
-        int aa = 5;
-    }
+//    @ExceptionHandler(Exception.class)
+//    public void aa(Exception a) {
+//        int aa = 5;
+//    }
 
 
 }

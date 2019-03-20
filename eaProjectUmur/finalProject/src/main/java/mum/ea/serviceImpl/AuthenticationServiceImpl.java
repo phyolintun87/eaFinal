@@ -3,6 +3,7 @@ package mum.ea.serviceImpl;
 import mum.ea.dao.AuthenticationDao;
 import mum.ea.dao.MemberDao;
 import mum.ea.domain.Member;
+import mum.ea.domain.Roles;
 import mum.ea.dto.ExtendedLoginModel;
 import mum.ea.dto.LoginModel;
 import mum.ea.dto.MailBuilder;
@@ -17,6 +18,9 @@ import mum.ea.validation.EaValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @Service
@@ -36,6 +40,38 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @EaValidate
     public EaResult register(Member member) {
+
+        if (member.getIdMemberType() == 1) {
+            List<Roles> roles = new ArrayList<Roles>();
+
+            Roles roles1 = new Roles();
+            roles1.setId(1L);
+            roles.add(roles1);
+
+            Roles roles2 = new Roles();
+            roles2.setId(2L);
+            roles.add(roles2);
+
+            Roles roles3 = new Roles();
+            roles3.setId(3L);
+            roles.add(roles3);
+
+            Roles roles4 = new Roles();
+            roles4.setId(4L);
+            roles.add(roles4);
+
+            member.setRoleList(roles);
+        } else {
+            List<Roles> roles = new ArrayList<Roles>();
+
+            Roles roles1 = new Roles();
+            roles1.setId(4L);
+            roles.add(roles1);
+
+            member.setRoleList(roles);
+        }
+
+
         EaResult result = memberDao.save(member);
 
         if (result.isSuccess()) {
