@@ -166,7 +166,6 @@ public class AddMemberPanel extends javax.swing.JFrame {
              memberModel.setIdMemberType(2L);
         }
         
-        System.out.println(memberModel.getIdMemberType());
      
         
         MemberController memberController = new MemberController();

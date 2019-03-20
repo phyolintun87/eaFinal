@@ -24,6 +24,7 @@ public class CourseController extends CrudController<Course, CourseService> {
     public EaResultData<List<Course>> listMyCourses() {
         return courseService.listMyCourses();
     }
-
+    
+    
 
 }
