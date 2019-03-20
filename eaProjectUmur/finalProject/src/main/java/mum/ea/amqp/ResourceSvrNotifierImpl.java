@@ -1,5 +1,6 @@
 package mum.ea.amqp;
 
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,9 @@ public class ResourceSvrNotifierImpl implements ResourceSvrNotifier{
 		dto.setPayLoad(materialID.toString());
 		dto.setCommand(Command.GET);
 		
-		return publishAndGetResponse(dto);
+		publish(dto);
+		
+		return "Payload";
 	}
 
 	public void savePayload(Material material) {
@@ -43,7 +46,12 @@ public class ResourceSvrNotifierImpl implements ResourceSvrNotifier{
 	}
 
 	private String publishAndGetResponse(ResourceDto dto) {
-		 return (String)resdirectTemplate.convertSendAndReceive(dto);
+		
+		 Queue queueReply = new Queue("myQueue_reply");
+		 resdirectTemplate.setReplyQueue(queueReply);     
+		 Object test = resdirectTemplate.convertSendAndReceive(dto);
+		 
+		 return (String)test;
 	}
 	 
 	private void publish(ResourceDto dto) {

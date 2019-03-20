@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import mum.ea.controller.abstracts.CrudController;
+import mum.ea.domain.Material;
 import mum.ea.domain.Test;
 import mum.ea.service.TestService;
 
@@ -30,14 +31,32 @@ public class TestController extends CrudController<Test, TestService> {
         memberBatch.startjob();
     }
     
-    @DeleteMapping(value="/message/delete/{id}")
+    @DeleteMapping(value="/message/{id}")
     public String testDeleteMessage(@PathVariable("id") Long id  ) {
     	
     	System.out.println("id: "+id.toString());
     	resourceSvrNotifier.deletePayload(id);
     	
     	
-    	return "Success";
+    	return "Successfully delete";
     }
     
+    @GetMapping(value="/message/{id}")
+    public String testGetMessage(@PathVariable("id") Long id  ) {
+    	
+    	System.out.println("id: "+id.toString());    	 
+    	
+    	return resourceSvrNotifier.getPayload(id);
+    }
+    
+    @PostMapping(value="/message")
+    public String testSaveMessage() {
+    	
+    	Material m=new Material();
+    	m.setName("Test Resource File");
+    	resourceSvrNotifier.savePayload(m);
+    	
+    	return "Successfully Save";
+    	
+    }
 }
