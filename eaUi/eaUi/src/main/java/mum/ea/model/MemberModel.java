@@ -21,12 +21,12 @@ public class MemberModel {
     
     private MemberType memberType;
 
-    public MemberType getMemberTypeModel() {
+    public MemberType getMemberType() {
         return memberType;
     }
 
-    public void setMemberTypeModel(MemberType memberTypeModel) {
-        this.memberType= memberTypeModel;
+    public void setMemberTyp(MemberType memberType) {
+        this.memberType= memberType;
     }
 
     public Long getIdMemberType() {

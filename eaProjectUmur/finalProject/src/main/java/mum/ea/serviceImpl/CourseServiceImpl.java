@@ -82,4 +82,11 @@ public class CourseServiceImpl implements CourseService {
     public EaResultData<List<Course>> findAll() {
         return courseDao.findAll();
     }
+
+    public EaResultData<List<Course>> listMyCourses() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUserDetails jwtUserDetails = (JwtUserDetails) authentication.getPrincipal();
+        long currentUserId=jwtUserDetails.getId();
+        return courseDao.listMyCourses(currentUserId);
+    }
 }

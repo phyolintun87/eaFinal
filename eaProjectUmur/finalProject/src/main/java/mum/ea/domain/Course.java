@@ -26,7 +26,7 @@ public class Course extends BaseDomain {
     private Set<Lesson> lessonList;
 
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "instuctor_id")
    // @JsonBackReference(value = "teachingCourseList")

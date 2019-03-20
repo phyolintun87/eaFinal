@@ -34,6 +34,7 @@ public class MainPanel extends javax.swing.JFrame {
         addCourseButton = new javax.swing.JButton();
         addLessonButton = new javax.swing.JButton();
         startBatchButton = new javax.swing.JButton();
+        listMyCoursesButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +59,13 @@ public class MainPanel extends javax.swing.JFrame {
             }
         });
 
+        listMyCoursesButton.setText("List My Courses");
+        listMyCoursesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listMyCoursesButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -69,8 +77,10 @@ public class MainPanel extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(addCourseButton)
                         .addGap(88, 88, 88)
-                        .addComponent(addLessonButton)))
-                .addContainerGap(359, Short.MAX_VALUE))
+                        .addComponent(addLessonButton)
+                        .addGap(93, 93, 93)
+                        .addComponent(listMyCoursesButton)))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,7 +88,8 @@ public class MainPanel extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addCourseButton)
-                    .addComponent(addLessonButton))
+                    .addComponent(addLessonButton)
+                    .addComponent(listMyCoursesButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
                 .addComponent(startBatchButton)
                 .addGap(59, 59, 59))
@@ -114,6 +125,12 @@ public class MainPanel extends javax.swing.JFrame {
         BatchController batchController = new BatchController();
         batchController.start();
     }//GEN-LAST:event_startBatchButtonActionPerformed
+
+    private void listMyCoursesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listMyCoursesButtonActionPerformed
+         ListMyCoursesPanel listMyCoursesPanel= new ListMyCoursesPanel();
+         listMyCoursesPanel.show();
+         this.dispose();
+    }//GEN-LAST:event_listMyCoursesButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +171,7 @@ public class MainPanel extends javax.swing.JFrame {
     private javax.swing.JButton addCourseButton;
     private javax.swing.JButton addLessonButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton listMyCoursesButton;
     private javax.swing.JButton startBatchButton;
     // End of variables declaration//GEN-END:variables
 }

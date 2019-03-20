@@ -5,10 +5,12 @@
  */
 package mum.ea.panel;
 
+import java.util.List;
 import javax.swing.JOptionPane;
 import mum.ea.controller.CourseController;
 import mum.ea.model.CourseModel;
 import mum.ea.model.EaResult;
+import mum.ea.model.EaResultData;
 import mum.ea.model.StatusCode;
 
 /**
@@ -22,6 +24,8 @@ public class AddCoursePanel extends javax.swing.JFrame {
      */
     public AddCoursePanel() {
         initComponents();
+        
+    
     }
 
     /**
