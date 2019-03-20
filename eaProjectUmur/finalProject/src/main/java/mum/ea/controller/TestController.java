@@ -1,8 +1,12 @@
 package mum.ea.controller;
 
+import mum.ea.amqp.ResourceSvrNotifier;
 import mum.ea.batch.MemberBatch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +21,23 @@ public class TestController extends CrudController<Test, TestService> {
 
     @Autowired
     private MemberBatch memberBatch;
-
+    
+    @Autowired
+	ResourceSvrNotifier resourceSvrNotifier;
+    
     @GetMapping(value = "/start")
     public void startBatch() {
         memberBatch.startjob();
     }
-
+    
+    @DeleteMapping(value="/message/delete/{id}")
+    public String testDeleteMessage(@PathVariable("id") Long id  ) {
+    	
+    	System.out.println("id: "+id.toString());
+    	resourceSvrNotifier.deletePayload(id);
+    	
+    	
+    	return "Success";
+    }
+    
 }

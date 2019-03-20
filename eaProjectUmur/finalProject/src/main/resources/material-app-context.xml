@@ -25,7 +25,7 @@
 
 <!-- **************** DIRECT PRODUCER  -->
  <!-- This producer will publish with this routing key [essentially to queue directQueue] associated with it...] -->
-    <rabbit:template id="directTemplate" connection-factory="connectionFactory"
+    <rabbit:template id="resdirectTemplate" connection-factory="connectionFactory"
                      reply-timeout="2000" routing-key="material.key"
                      exchange="direct" />
  

@@ -30,6 +30,7 @@ public class MaterialServiceImpl implements MaterialService {
     	EaResult result = materialDao.save(t);
     	
     	if(result.isSuccess()) {
+    		
     		resourceSvrNotifier.savePayload(t);    		
     		
     	}
@@ -39,8 +40,9 @@ public class MaterialServiceImpl implements MaterialService {
 
     public EaResult delete(Long id) {
     	EaResult result = materialDao.delete(id);
-    	
+    	System.out.println("come into deleting");
     	if(result.isSuccess()) {
+    		System.out.println("success");
     		resourceSvrNotifier.deletePayload(id);
     	}
     	

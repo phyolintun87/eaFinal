@@ -1,10 +1,13 @@
 package mum.ea.dto;
 
+import java.io.Serializable;
+
 import mum.ea.domain.Command;
 
-public class ResourceDTO {
+public class ResourceDto implements Serializable{
+	private static final long serialVersionUID = 4849713453395430477L;
 	private Command command;
-	private Object payLoad;
+	private String payLoad;
 	 
 	public Command getCommand() {
 		return command;
@@ -12,11 +15,12 @@ public class ResourceDTO {
 	public void setCommand(Command command) {
 		this.command = command;
 	}
-	public Object getPayLoad() {
+	public String getPayLoad() {
 		return payLoad;
 	}
-	public void setPayLoad(Object payLoad) {
+	public void setPayLoad(String payLoad) {
 		this.payLoad = payLoad;
 	}		
+	
 	
 }
