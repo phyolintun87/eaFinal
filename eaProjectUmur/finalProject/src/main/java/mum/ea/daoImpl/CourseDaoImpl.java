@@ -29,18 +29,25 @@ public class CourseDaoImpl extends GenericDaoImpl<Course> implements CourseDao {
         long currentUserId = jwtUserDetails.getId();
 
         try {
-            Query query = entityManager
-                    .createQuery("from Member where id=:id");
-            query.setParameter("id", currentUserId);
 
-            Member m = (Member) query.getSingleResult();
-            if (m.getCourseList() == null) {
-                m.setCourseList(new ArrayList<Course>());
-            }
-            Course c = new Course();
-            c.setId(idCourse);
-
-            m.getCourseList().add(c);
+            Query query = entityManager.createNativeQuery("insert into eaFinal.member_role_rel(Member_id, roleList_id) VALUES (?,?)");
+            query.setParameter(1,currentUserId);
+            query.setParameter(2,idCourse);
+            query.executeUpdate();
+//            Query query = entityManager
+//                    .createQuery("from Member where id=:id");
+//            query.setParameter("id", currentUserId);
+//
+//            Member m = (Member) query.getSingleResult();
+//            if (m.getCourseList() == null) {
+//                m.setCourseList(new ArrayList<Course>());
+//            }
+//            Course c = new Course();
+//            c.setId(idCourse);
+//
+//            m.getCourseList().add(c);
+//
+//            entityManager.merge(m);
 
         } catch (Exception e) {
             int a = 5;
