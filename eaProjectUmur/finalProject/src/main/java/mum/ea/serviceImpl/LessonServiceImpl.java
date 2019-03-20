@@ -22,22 +22,10 @@ public class LessonServiceImpl implements LessonService {
     private LessonDao lessonDao;
     
 
-    @Autowired
-    private EaMailSender eaMailSender;
 
-    public EaResult save(Lesson t) {
-    	EaResult result =  lessonDao.save(t);
-    	if(result.isSuccess()) {
-       MailBuilder mailBuilder = new MailBuilder();
-       MailDto mailDto = mailBuilder.buildTo(t.getCourse().getInstructor().getMail())
-               .buildName(t.getCourse().getInstructor().getFirstname() + " " + t.getCourse().getInstructor().getLastname())
-               .buildSubject("Successfully create lesson")
-               .buildTemplate("lessonTemp")
-               .build();
-       eaMailSender.sendMail(mailDto);
-    	}
+    public EaResult save(Lesson t) {    	
     	
-    	return result;
+    	return   lessonDao.save(t);
     }
 
     public EaResult delete(Long id) {

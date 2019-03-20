@@ -3,15 +3,20 @@ package mum.ea.domain;
 
 import mum.ea.domain.abstracts.BaseDomain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.List;
 
 @Entity
 public class Lesson extends BaseDomain {
-
+	@Column(length = 255, nullable = false)
+	@NotEmpty
     private String name;
 
     @ManyToOne
