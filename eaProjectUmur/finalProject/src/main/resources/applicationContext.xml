@@ -27,6 +27,7 @@
     <context:property-placeholder
             location="classpath:application.properties"/>
 
+
     <rabbit:connection-factory id="connectionFactory" host="localhost" port="5672" username="guest" password="guest"/>
     <rabbit:admin connection-factory="connectionFactory" />
 

@@ -9,6 +9,7 @@ import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
 import mum.ea.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,10 @@ public class AuthenticationController extends EaController {
         return authenticationService.login(loginModel);
     }
 
-    @PostMapping(value = "/register")
+    @PostMapping(path = "/register")
     public EaResult register(@RequestBody Member member) {
-        return authenticationService.register(member);
+      // return new EaResult();
+       return authenticationService.register(member);
     }
 
 }

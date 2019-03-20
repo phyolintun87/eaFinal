@@ -22,6 +22,7 @@ public class JwtUtil {
         claims.put("firstName", jwtUserDetails.getFirstName());
         claims.put("lastName", jwtUserDetails.getLastName());
         claims.put("roles", jwtUserDetails.getRoles());
+        claims.put("id", jwtUserDetails.getId());
         EaResultData<String> result = new EaResultData<String>();
         result.setData(Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, secret).compact());
         result.makeSuccess();
@@ -41,6 +42,7 @@ public class JwtUtil {
             jwtUserDetails.setFirstName((String) body.get("firstName"));
             jwtUserDetails.setLastName((String) body.get("lastName"));
             jwtUserDetails.setRoles((List<String>) body.get("roles"));
+            jwtUserDetails.setId(Long.parseLong(body.get("id").toString()));
 
             result.setData(jwtUserDetails);
             result.makeSuccess();

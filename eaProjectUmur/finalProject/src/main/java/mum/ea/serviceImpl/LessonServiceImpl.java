@@ -20,8 +20,9 @@ public class LessonServiceImpl implements LessonService {
     private LessonDao lessonDao;
 
     @EaValidate
-    public EaResult save(Lesson t) {
-       return lessonDao.save(t);
+    public EaResult save(Lesson lesson) {
+
+       return lessonDao.save(lesson);
     }
 
     public EaResult delete(Long id) {

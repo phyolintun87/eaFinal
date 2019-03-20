@@ -1,29 +1,34 @@
 package mum.ea.domain;
 
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import mum.ea.domain.abstracts.BaseDomain;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Lesson extends BaseDomain {
 
     @Size(min = 6)
+    @Column(name = "name_e")
     private String name;
 
     @Size(min = 10)
     private String description;
 
-    @ManyToOne
+    //@JsonIgnore
+  //  @JsonBackReference(value = "lessonList")
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_course")
     private Course course;
 
-    @OneToMany(mappedBy = "lesson")
+    @JsonIgnore
+   // @JsonManagedReference(value = "materialList")
+    @OneToMany(mappedBy = "lesson",fetch = FetchType.EAGER)
     private List<Material> materialList;
 
     public String getDescription() {

@@ -9,11 +9,14 @@ import mum.ea.domain.Member;
 import mum.ea.dto.CourseDto;
 import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
+import mum.ea.security.JwtUserDetails;
 import mum.ea.service.CourseService;
 import mum.ea.validation.EaValidate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,18 +34,18 @@ public class CourseServiceImpl implements CourseService {
 
     @EaValidate
     public EaResult save(Course course) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUserDetails jwtUserDetails = (JwtUserDetails) authentication.getPrincipal();
+        long currentUserId=jwtUserDetails.getId();
+        Member member = new Member();
+        member.setId(currentUserId);
+        course.setInstructor(member);
 
         if (course.getLessonList() != null) {
             for (Lesson lesson : course.getLessonList()) {
                 lesson.setCourse(course);
             }
         }
-
-//        if (course.getJoinedMembers() != null) {
-//                for(Member m : ){
-//
-//                }
-//        }
 
         EaResult result = courseDao.save(course);
         if (result.isSuccess()) {

@@ -57,6 +57,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             // generate token
             JwtUserDetails jwtUserDetails = new JwtUserDetails();
             jwtUserDetails.setUsername(loginModel.getUsername());
+            jwtUserDetails.setId(result.getData().getId());
 
             //fetch roles
 

@@ -1,12 +1,18 @@
 package mum.ea.domain;
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import mum.ea.domain.abstracts.BaseDomain;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Member extends BaseDomain {
 
     @NotEmpty
@@ -19,6 +25,7 @@ public class Member extends BaseDomain {
     private String username;
 
     @NotEmpty
+    @Column(name = "password_d")
     private String password;
 
     private String mail;
@@ -28,13 +35,21 @@ public class Member extends BaseDomain {
     @JoinColumn(name = "id_member_type")
     private MemberType memberType;
 
-    @ManyToMany(mappedBy = "joinedMembers",fetch = FetchType.EAGER)
+
+    @JsonIgnore
+   // @JsonManagedReference(value = "courseList")
+    @ManyToMany(mappedBy = "joinedMembers",fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SELECT)
+    @BatchSize(size = 3)
     private List<Course> courseList;
 
+    @JsonIgnore
+    //@JsonManagedReference(value = "teachingCourseList")
     @OneToMany(mappedBy = "instructor",fetch = FetchType.EAGER)
     private List<Course> teachingCourseList;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "member_role_rel",inverseJoinColumns = {@JoinColumn(unique = false)})
     private List<Roles> roleList;
 
     public List<Roles> getRoleList() {
