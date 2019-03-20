@@ -6,9 +6,12 @@
 package mum.ea.panel;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import mum.ea.controller.CourseController;
 import mum.ea.model.CourseModel;
+import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
+import mum.ea.model.StatusCode;
 
 /**
  *
@@ -108,7 +111,18 @@ public class EnrollCoursePanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        
+        CourseModel cm = (CourseModel) coursesCombo.getSelectedItem();
+
+        CourseController courseController = new CourseController();
+        EaResult result = courseController.enroll(cm.getId());
+        if (result.getStatusCode()==StatusCode.SUCCESS) {
+            JOptionPane.showMessageDialog(null, "Succesfull");
+            MainPanel mainPanel=new MainPanel();
+            mainPanel.show();
+            this.dispose();
+        } else {
+            System.out.println(result.getStatusCode());
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

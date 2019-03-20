@@ -147,6 +147,9 @@ public class AddCoursePanel extends javax.swing.JFrame {
         EaResult result = courseController.save(courseModel);
         if(result.getStatusCode()== StatusCode.SUCCESS){
             JOptionPane.showMessageDialog(null, "Succesfull");
+             MainPanel panel=new MainPanel();
+            panel.show();
+            this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, result.getStatusCode() + "  " + result.getMessage());
         }

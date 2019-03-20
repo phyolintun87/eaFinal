@@ -88,5 +88,16 @@ public class CourseController {
 
         return res;
     }
+    
+      public EaResult enroll(Long idCourse) {
+        RestTemplate restTemplate = ServiceHelper.getRestTemplate();
+
+        HttpEntity<?> entity = new HttpEntity<Object>(ServiceHelper.getHeader(LoginHelper.getToken()));
+        ResponseEntity<EaResult> result = restTemplate
+                .exchange(ServiceHelper.getBASE_URL() + "api/course/enroll?idCourse=" + idCourse, HttpMethod.POST, entity, EaResult.class);
+        System.out.println(result.getBody().getMessage());
+
+        return result.getBody();
+    }
 
 }

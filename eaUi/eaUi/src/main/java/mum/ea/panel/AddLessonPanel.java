@@ -171,6 +171,9 @@ public class AddLessonPanel extends javax.swing.JFrame {
 
         if (result.getStatusCode() == StatusCode.SUCCESS) {
             JOptionPane.showMessageDialog(null, "Succesfull");
+             MainPanel panel=new MainPanel();
+            panel.show();
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, result.getStatusCode() + "  " + result.getMessage());
         }
