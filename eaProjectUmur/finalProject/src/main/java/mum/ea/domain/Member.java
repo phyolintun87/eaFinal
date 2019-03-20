@@ -25,7 +25,7 @@ public class Member extends BaseDomain {
 
 
     @OneToOne
-    @JoinColumn(name = "id_member_type")
+    @JoinColumn(name = "id_member_type",nullable=false)
     private MemberType memberType;
 
     @ManyToMany(mappedBy = "joinedMembers",fetch = FetchType.EAGER)

@@ -1,6 +1,7 @@
 package mum.ea.serviceImpl;
 
 import mum.ea.dao.MemberDao;
+import mum.ea.domain.Course;
 import mum.ea.domain.Member;
 import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
@@ -39,4 +40,10 @@ public class MemberServiceImpl implements MemberService {
     public EaResultData<List<Member>> findAll() {
         return memberDao.findAll();
     }
+    
+
+	public List<Course> myCourses(Long id) {
+		return  memberDao.myCourses(id);
+	}
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ExtendedLoginModel extends LoginModel {
     private String token;
+    private Long id;
     private List<String> roleList;
 
     public List<String> getRoleList() {
@@ -21,4 +22,14 @@ public class ExtendedLoginModel extends LoginModel {
     public void setToken(String token) {
         this.token = token;
     }
+
+	public void setId(Long id) {
+		
+	    this.id=id;
+		
+	}
+	
+	public Long getId() {
+		return id;
+	}
 }
