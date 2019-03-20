@@ -1,28 +1,42 @@
 package mum.ea.domain;
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import mum.ea.domain.abstracts.BaseDomain;
 
 import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
+import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Course extends BaseDomain {
 
+    @Size(min = 6)
+    @Column(name = "name_e")
     private String name;
-    @NotEmpty(message="Shoule not be empty")
+
+    @Size(min = 10)
     private String description;
 
-    @OneToMany(mappedBy = "course")
-    private List<Lesson> lessonList;
+    @JsonIgnore
+   // @JsonManagedReference(value = "lessonList")
+    @OneToMany(mappedBy = "course" ,fetch = FetchType.EAGER)
+    private Set<Lesson> lessonList;
 
 
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "instuctor_id")
+   // @JsonBackReference(value = "teachingCourseList")
+    //@JsonIgnore
     private Member instructor;
 
+    @JsonIgnore
+   // @JsonBackReference(value = "courseList")
     @ManyToMany
     @JoinTable(name = "Enrollment",
             joinColumns = {@JoinColumn(name = "id_course")},
@@ -30,9 +44,18 @@ public class Course extends BaseDomain {
     private List<Member> joinedMembers;
 
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_sub_category")
     private SubCategory subCategory;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getName() {
         return name;
@@ -42,11 +65,11 @@ public class Course extends BaseDomain {
         this.name = name;
     }
 
-    public List<Lesson> getLessonList() {
+    public Set<Lesson> getLessonList() {
         return lessonList;
     }
 
-    public void setLessonList(List<Lesson> lessonList) {
+    public void setLessonList(Set<Lesson> lessonList) {
         this.lessonList = lessonList;
     }
 

@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 import mum.ea.domain.Test;
 import mum.ea.dao.TestDao;
 import mum.ea.service.TestService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
+@Transactional
 public class TestServiceImpl implements TestService {
 
     @Autowired
@@ -31,6 +33,7 @@ public class TestServiceImpl implements TestService {
         return testDao.delete(id);
     }
 
+    @EaValidate
     public EaResult update(Test t) {
         return testDao.update(t);
     }
@@ -39,7 +42,9 @@ public class TestServiceImpl implements TestService {
         return testDao.findById(id);
     }
 
+
     @Secured("ROLE_test")
+
     @PerformanceLog
     public EaResultData<List<Test>> findAll() {
         return testDao.findAll();

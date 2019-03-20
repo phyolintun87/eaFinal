@@ -57,9 +57,7 @@ public class EaSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/api/authentication*").permitAll()
-                .antMatchers("/api/test*").permitAll()
-                .antMatchers("/api/member*").permitAll()
+                .authorizeRequests()
                 .antMatchers("/").authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint)

@@ -1,7 +1,10 @@
 package mum.ea.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import mum.ea.domain.abstracts.BaseDomain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -9,8 +12,11 @@ import java.util.List;
 @Entity
 public class Category extends BaseDomain {
 
+    @Column(name = "name_e")
     private String name;
 
+    @JsonIgnore
+    //@JsonBackReference
     @OneToMany(mappedBy = "category")
     private List<SubCategory> subCategoryList;
 

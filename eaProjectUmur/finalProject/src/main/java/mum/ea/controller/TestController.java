@@ -15,12 +15,6 @@ import mum.ea.service.TestService;
 @RequestMapping("/api/test")
 public class TestController extends CrudController<Test, TestService> {
 
-    @Autowired
-    private MemberBatch memberBatch;
 
-    @GetMapping(value = "/start")
-    public void startBatch() {
-        memberBatch.startjob();
-    }
 
 }

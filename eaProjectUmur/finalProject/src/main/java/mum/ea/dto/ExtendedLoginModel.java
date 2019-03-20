@@ -5,6 +5,7 @@ import java.util.List;
 public class ExtendedLoginModel extends LoginModel {
     private String token;
     private Long id;
+    private Long memberType;
     private List<String> roleList;
 
     public List<String> getRoleList() {
@@ -32,4 +33,14 @@ public class ExtendedLoginModel extends LoginModel {
 	public Long getId() {
 		return id;
 	}
+
+	public Long getMemberType() {
+		return memberType;
+	}
+
+	public void setMemberType(Long memberType) {
+		this.memberType = memberType;
+	}
+	
+	
 }

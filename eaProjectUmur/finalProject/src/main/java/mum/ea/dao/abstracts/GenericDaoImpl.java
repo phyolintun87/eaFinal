@@ -11,7 +11,8 @@ import java.util.List;
 public abstract class GenericDaoImpl<TDomain extends BaseDomain> implements GenericDao<TDomain> {
 
     @PersistenceContext
-	protected EntityManager entityManager;
+
+    protected EntityManager entityManager;
 
     protected Class<TDomain> domainClass;
 

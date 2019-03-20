@@ -4,13 +4,20 @@ import mum.ea.amqp.CourseNotifier;
 import mum.ea.amqp.CourseNotifierImpl;
 import mum.ea.dao.CourseDao;
 import mum.ea.domain.Course;
+import mum.ea.domain.Lesson;
+import mum.ea.domain.Member;
 import mum.ea.dto.CourseDto;
 import mum.ea.model.EaResult;
 import mum.ea.model.EaResultData;
+import mum.ea.security.JwtUserDetails;
 import mum.ea.service.CourseService;
+import mum.ea.validation.EaValidate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,16 +33,31 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     private RabbitTemplate topicTemplate;
 
-    public EaResult save(Course t) {
-        EaResult result = courseDao.save(t);
+    @Secured(value = "ROLE_ADD_COURSE")
+    @EaValidate
+    public EaResult save(Course course) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUserDetails jwtUserDetails = (JwtUserDetails) authentication.getPrincipal();
+        long currentUserId=jwtUserDetails.getId();
+        Member member = new Member();
+        member.setId(currentUserId);
+        course.setInstructor(member);
+
+        if (course.getLessonList() != null) {
+            for (Lesson lesson : course.getLessonList()) {
+                lesson.setCourse(course);
+            }
+        }
+
+        EaResult result = courseDao.save(course);
         if (result.isSuccess()) {
             // publish to users about new course
-            try{
+            try {
                 CourseNotifier courseNotifier = new CourseNotifierImpl();
                 CourseDto courseDto = new CourseDto();
-                courseDto.setName(t.getName());
-                courseNotifier.publish(topicTemplate,courseDto);
-            }catch (Exception e){
+                courseDto.setName(course.getName());
+                courseNotifier.publish(topicTemplate, courseDto);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -47,6 +69,8 @@ public class CourseServiceImpl implements CourseService {
         return courseDao.delete(id);
     }
 
+    @Secured(value = "ROLE_ADD_COURSE")
+    @EaValidate
     public EaResult update(Course t) {
         return courseDao.update(t);
     }
@@ -57,5 +81,12 @@ public class CourseServiceImpl implements CourseService {
 
     public EaResultData<List<Course>> findAll() {
         return courseDao.findAll();
+    }
+
+    public EaResultData<List<Course>> listMyCourses() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUserDetails jwtUserDetails = (JwtUserDetails) authentication.getPrincipal();
+        long currentUserId=jwtUserDetails.getId();
+        return courseDao.listMyCourses(currentUserId);
     }
 }
