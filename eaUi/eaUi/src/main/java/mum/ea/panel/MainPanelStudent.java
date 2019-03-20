@@ -12,7 +12,7 @@ import mum.ea.controller.MemberController;
 import mum.ea.helper.LoginHelper;
 import mum.ea.model.CourseModel;
 import mum.ea.model.EaResultData;
-import mum.ea.panel.AddMemberPanel;
+import mum.ea.panel.AddMemberPanel123;
 
 /**
  *

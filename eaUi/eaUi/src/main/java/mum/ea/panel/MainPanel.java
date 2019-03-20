@@ -6,7 +6,7 @@
 package mum.ea.panel;
 
 import mum.ea.controller.BatchController;
-import mum.ea.panel.AddMemberPanel;
+import mum.ea.panel.AddMemberPanel123;
 
 /**
  *

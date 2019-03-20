@@ -89,6 +89,10 @@ public class CourseServiceImpl implements CourseService {
         long currentUserId=jwtUserDetails.getId();
         return courseDao.listMyCourses(currentUserId);
     }
-    
-   
+
+
+    public EaResult enroll(Long idCourse) {
+        return courseDao.enroll(idCourse);
+    }
+
 }

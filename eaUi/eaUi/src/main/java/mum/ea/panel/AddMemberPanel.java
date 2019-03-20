@@ -47,7 +47,8 @@ public class AddMemberPanel extends javax.swing.JFrame {
         mailField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        memberTypeCombo = new javax.swing.JComboBox<String>();
+        memberTypeCombo = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,10 +71,12 @@ public class AddMemberPanel extends javax.swing.JFrame {
 
         jLabel6.setText("Member Type");
 
-        memberTypeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Teacher", "Student" }));
-        memberTypeCombo.addActionListener(new java.awt.event.ActionListener() {
+        memberTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teacher", "Student" }));
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                memberTypeComboActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -96,13 +99,15 @@ public class AddMemberPanel extends javax.swing.JFrame {
                                 .addComponent(jLabel6)))
                         .addGap(86, 86, 86)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(firstnameField, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                            .addComponent(firstnameField, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                             .addComponent(lastnameField)
                             .addComponent(usernameField)
                             .addComponent(passwordField)
                             .addComponent(mailField)
                             .addComponent(memberTypeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(380, 380, 380))
+                .addGap(198, 198, 198)
+                .addComponent(jButton1)
+                .addGap(85, 85, 85))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +137,9 @@ public class AddMemberPanel extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(memberTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(saveButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveButton)
+                    .addComponent(jButton1))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
 
@@ -165,7 +172,6 @@ public class AddMemberPanel extends javax.swing.JFrame {
         }else{
              memberModel.setIdMemberType(2L);
         }
-        
      
         
         MemberController memberController = new MemberController();
@@ -178,9 +184,11 @@ public class AddMemberPanel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void memberTypeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_memberTypeComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_memberTypeComboActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        MainPanel mainPanel = new MainPanel();
+        mainPanel.show();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,6 +228,7 @@ public class AddMemberPanel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField firstnameField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
