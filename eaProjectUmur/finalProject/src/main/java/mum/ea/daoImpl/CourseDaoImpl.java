@@ -49,6 +49,7 @@ public class CourseDaoImpl extends GenericDaoImpl<Course> implements CourseDao {
         } catch (Exception e) {
             int a = 5;
         }
+        result.makeSuccess();
         return result;
     }
 
