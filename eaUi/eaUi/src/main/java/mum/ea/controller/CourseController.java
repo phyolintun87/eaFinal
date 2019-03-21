@@ -29,11 +29,17 @@ public class CourseController {
 
     public EaResult save(CourseModel courseModel) {
         RestTemplate restTemplate = ServiceHelper.getRestTemplate();
-
-        HttpEntity<CourseModel> entity = new HttpEntity<>(courseModel, ServiceHelper.getHeader(LoginHelper.getToken()));
-        ResponseEntity<EaResult> result = restTemplate
-                .exchange(ServiceHelper.getBASE_URL() + "api/course", HttpMethod.POST, entity, EaResult.class);
-        System.out.println(result.getBody().getMessage());
+        ResponseEntity<EaResult> result = null;
+        try {
+            HttpEntity<CourseModel> entity = new HttpEntity<>(courseModel, ServiceHelper.getHeader(LoginHelper.getToken()));
+            result = restTemplate
+                    .exchange(ServiceHelper.getBASE_URL() + "api/course", HttpMethod.POST, entity, EaResult.class);
+            System.out.println(result.getBody().getMessage());
+        } catch (Exception e) {
+            EaResult eaResult = new EaResult();
+            eaResult.setStatusCode(StatusCode.AUTHORIZATION_ERROR);
+            return eaResult;
+        }
 
         return result.getBody();
     }
@@ -57,18 +63,18 @@ public class CourseController {
                 .exchange(ServiceHelper.getBASE_URL() + "api/course", HttpMethod.GET, entity, EaResultData.class);
 
         ObjectMapper mapper = new ObjectMapper();
-          mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         List<CourseModel> myObjects
                 = mapper.convertValue(result.getBody().getData(), new TypeReference<List<CourseModel>>() {
                 });
-        
+
         EaResultData<List<CourseModel>> res = new EaResultData<>();
         res.setData(myObjects);
         res.setStatusCode(StatusCode.SUCCESS);
 
         return res;
     }
-    
+
     public EaResultData<List<CourseModel>> getAllMyCourses() {
         RestTemplate restTemplate = ServiceHelper.getRestTemplate();
 
@@ -77,19 +83,19 @@ public class CourseController {
                 .exchange(ServiceHelper.getBASE_URL() + "api/course/myCourses", HttpMethod.GET, entity, EaResultData.class);
 
         ObjectMapper mapper = new ObjectMapper();
-          mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         List<CourseModel> myObjects
                 = mapper.convertValue(result.getBody().getData(), new TypeReference<List<CourseModel>>() {
                 });
-        
+
         EaResultData<List<CourseModel>> res = new EaResultData<>();
         res.setData(myObjects);
         res.setStatusCode(StatusCode.SUCCESS);
 
         return res;
     }
-    
-     public EaResult enroll(Long idCourse) {
+
+    public EaResult enroll(Long idCourse) {
         RestTemplate restTemplate = ServiceHelper.getRestTemplate();
 
         HttpEntity<?> entity = new HttpEntity<Object>(ServiceHelper.getHeader(LoginHelper.getToken()));
